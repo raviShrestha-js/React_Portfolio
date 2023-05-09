@@ -32,6 +32,5 @@
   border-radius: 50%;
   position: relative;
   animation: pulsate-animation 3s ease-in-out infinite,
-    rotate-animation 10s linear infinite,
     border-color-animation 5s linear infinite;
 }
