@@ -1,0 +1,37 @@
+@keyframes border-color-animation {
+  0% {
+    border-color: #ff0000;
+  }
+  25% {
+    border-color: #00ff00;
+  }
+  50% {
+    border-color: #0000ff;
+  }
+  75% {
+    border-color: #ff00ff;
+  }
+  100% {
+    border-color: #ff0000;
+  }
+}
+
+@keyframes rotate-animation {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.profile-picture {
+  width: 200px;
+  height: 200px;
+  border: 10px solid #ff0000;
+  border-radius: 50%;
+  position: relative;
+  animation: pulsate-animation 3s ease-in-out infinite,
+    rotate-animation 10s linear infinite,
+    border-color-animation 5s linear infinite;
+}
