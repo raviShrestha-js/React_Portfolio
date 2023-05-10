@@ -17,6 +17,7 @@
     "@react-three/drei": "^9.66.1",
     "@react-three/fiber": "^8.13.0",
     "framer-motion": "^10.12.4",
+    "ityped": "^1.0.3",
     "maath": "^0.5.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

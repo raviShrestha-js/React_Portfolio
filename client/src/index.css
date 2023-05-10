@@ -273,6 +273,21 @@ h1 {
 .auto-typed {
   color: var(--color-dark);
 }
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(20, end) infinite;
+}
 
 .summary {
   width: 60%;
@@ -599,6 +614,12 @@ h3 {
   max-width: 80%;
   max-height: 80%;
   overflow: auto;
+}
+
+.project-container-absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .backdrop {

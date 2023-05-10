@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
 
 const ProjectContent = ({ image, alt, repoLink, liveLink, title }) => (
   <>
@@ -47,6 +47,10 @@ Project.propTypes = {
 
 const Projects = () => {
   const [selectedId, setSelectedId] = useState(null);
+  const projectBgRef = useRef();
+  const controls = useAnimation();
+  const [animationTriggered, setAnimationTriggered] = useState(false);
+
   const projectData = [
     {
       image: "../src/images/admin.png",
@@ -90,20 +94,58 @@ const Projects = () => {
       liveLink: "https://ravishrestha-js.github.io/portfolio-cv/",
       title: "Portfolio Website",
     },
-    // ... Add other projects data here
   ];
   const selectedItem = projectData.find((item) => item.title === selectedId);
+
+  useEffect(() => {
+    const handleIntersection = async (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting && !animationTriggered) {
+          setAnimationTriggered(true);
+          await controls.start((i) => ({
+            x: [0, 0],
+            y: [0, 0],
+            opacity: [0, 2],
+            transition: { duration: 1, delay: i * 0.8 },
+            zIndex: i + 1,
+          }));
+        } else if (!entry.isIntersecting) {
+          setAnimationTriggered(false);
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, {
+      threshold: 0.5,
+    });
+
+    if (projectBgRef.current) {
+      observer.observe(projectBgRef.current);
+    }
+
+    return () => {
+      if (projectBgRef.current) {
+        observer.unobserve(projectBgRef.current);
+      }
+    };
+  }, [projectBgRef, controls, animationTriggered]);
 
   return (
     <section className="projects" id="projects">
       <h1>Projects</h1>
-      <div className="project-bg">
+      <div className="project-bg" ref={projectBgRef}>
         {projectData.map((project, index) => (
-          <Project
+          <motion.div
             key={index}
-            {...project}
-            onClick={() => setSelectedId(project.title)}
-          />
+            custom={index}
+            animate={controls}
+            initial={{ x: 0, y: 0, opacity: 0, zIndex: index + 1 }}
+          >
+            <Project
+              {...project}
+              onClick={() => setSelectedId(project.title)}
+            />
+          </motion.div>
         ))}
       </div>
 
