@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "homepage": "https://ravishrestha-js.github.io/React_Portfolio",
+  "homepage": "https://ravishrestha-js.github.io/React_Portfolio/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
