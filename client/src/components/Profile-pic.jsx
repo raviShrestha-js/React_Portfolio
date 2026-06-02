@@ -1,8 +1,10 @@
+import profileImage from "../images/profile-3d-ravi.png";
+
 const ProfilePicture = () => {
   return (
     <div className="profile-picture-container">
       <img
-        src="../src/images/propic.jpg"
+        src={profileImage}
         alt="Profile"
         className="profile-picture"
       />

@@ -61,8 +61,8 @@ const Contact = () => {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3312.807143226136!2d151.08679061504557!3d-33.868860780656256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12bb261c6f3557%3A0xe85ce7b41a7c6ccc!2s9%2F1%20The%20Crescent%2C%20Strathfield%20NSW%202135!5e0!3m2!1sne!2sau!4v1650291083360!5m2!1sne!2sau"
             width="100%"
             height="400"
-            style="border: 0"
-            allowfullscreen=""
+            style={{ border: 0 }}
+            allowFullScreen
             loading="lazy"
           ></iframe>
         </div>

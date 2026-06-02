@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { useEffect, useState } from "react";
+import logoImage from "../images/ravi_logo.png";
 
 const Navigation = () => {
   const navItems = [
@@ -46,9 +47,7 @@ const Navigation = () => {
 
   return (
     <nav>
-      <img src="../src/images/ravi_logo.png" alt="logo" />
-
-      <br />
+      <img src={logoImage} alt="Ravi Shrestha logo" />
       <ul className={hamburgerActivated ? "activate" : ""}>
         {navItems.map((item, index) => (
           <a href={item.link} key={index} onClick={closeHamburger}>

@@ -5,11 +5,13 @@ import Skills from "./components/Skills";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
-// import Contact from "./components/Contact";
+import Contact from "./components/Contact";
+import ImmersiveBackground3D from "./components/ImmersiveBackground3D";
 
 function App() {
   return (
     <main className="container-main">
+      <ImmersiveBackground3D />
       <Navigation />
       <Main />
       <Aboutme />
@@ -17,7 +19,7 @@ function App() {
       <Education />
       <Experience />
       <Projects />
-      {/* <Contact /> */}
+      <Contact />
     </main>
   );
 }

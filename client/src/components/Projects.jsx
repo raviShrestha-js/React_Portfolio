@@ -1,180 +1,100 @@
-import { useState, useEffect, useRef } from "react";
-import PropTypes from "prop-types";
+import adminImage from "../images/admin.png";
+import calcImage from "../images/calc.png";
+import libraryImage from "../images/library.png";
+import landingImage from "../images/landing.png";
+import rpsImage from "../images/rps-screen.png";
+import portfolioImage from "../images/portfolio.png";
 
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
-
-const ProjectContent = ({ image, alt, repoLink, liveLink, title }) => (
-  <>
-    <div className="proj-image">
-      <img src={image} alt={alt} />
-      <div className="button-container">
-        <a href={repoLink} target="_blank" rel="noreferrer">
-          <button>View Code</button>
-        </a>
-        <a href={liveLink} target="_blank" rel="noreferrer">
-          <button>Live Preview</button>
-        </a>
-      </div>
-    </div>
-    <div className="proj-title">
-      <h3>{title}</h3>
-    </div>
-  </>
-);
-
-ProjectContent.propTypes = {
-  image: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
-  repoLink: PropTypes.string.isRequired,
-  liveLink: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-};
-
-const Project = ({ onClick, ...props }) => (
-  <motion.div
-    className="project-container"
-    layoutId={props.title}
-    onClick={onClick}
-  >
-    <ProjectContent {...props} />
-  </motion.div>
-);
-
-Project.propTypes = {
-  onClick: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-};
+const projectData = [
+  {
+    image: adminImage,
+    alt: "admin page",
+    repoLink: "https://github.com/raviShrestha-js/odin-admin-panel",
+    liveLink: "https://ravishrestha-js.github.io/odin-admin-panel/",
+    title: "Admin Dashboard",
+    summary: "Operational dashboard UI with dense layouts and admin-focused navigation.",
+    tag: "Control Room",
+  },
+  {
+    image: calcImage,
+    alt: "calculator",
+    repoLink: "https://github.com/raviShrestha-js/calculatorjs",
+    liveLink: "https://ravishrestha-js.github.io/calculatorjs/",
+    title: "Calculator JS",
+    summary: "JavaScript logic exercise focused on clean interaction states.",
+    tag: "Logic Core",
+  },
+  {
+    image: libraryImage,
+    alt: "library",
+    repoLink: "https://github.com/raviShrestha-js/thelibrary",
+    liveLink: "https://ravishrestha-js.github.io/thelibrary/",
+    title: "The Book Library",
+    summary: "CRUD-style interface for organizing and reviewing book records.",
+    tag: "Data Bay",
+  },
+  {
+    image: landingImage,
+    alt: "landing page",
+    repoLink: "https://github.com/raviShrestha-js/odin-landing-page",
+    liveLink: "https://ravishrestha-js.github.io/odin-landing-page/",
+    title: "Landing Page",
+    summary: "Responsive landing page practice with structured visual hierarchy.",
+    tag: "Launch Pad",
+  },
+  {
+    image: rpsImage,
+    alt: "rock paper scissor",
+    repoLink: "https://github.com/raviShrestha-js/rock-paper-scissor",
+    liveLink: "https://ravishrestha-js.github.io/rock-paper-scissor/",
+    title: "Rock Paper Scissor Game",
+    summary: "Interactive browser game with state transitions and score tracking.",
+    tag: "Game Sim",
+  },
+  {
+    image: portfolioImage,
+    alt: "portfolio page",
+    repoLink: "https://github.com/raviShrestha-js/portfolio-cv",
+    liveLink: "https://ravishrestha-js.github.io/portfolio-cv/",
+    title: "Portfolio Website",
+    summary: "Earlier portfolio iteration showing the foundation of this refresh.",
+    tag: "Archive",
+  },
+];
 
 const Projects = () => {
-  const [selectedId, setSelectedId] = useState(null);
-  const projectBgRef = useRef();
-  const controls = useAnimation();
-  const [animationTriggered, setAnimationTriggered] = useState(false);
-
-  const projectData = [
-    {
-      image: "../src/images/admin.png",
-      alt: "admin page",
-      repoLink: "https://github.com/raviShrestha-js/odin-admin-panel",
-      liveLink: "https://ravishrestha-js.github.io/odin-admin-panel/",
-      title: "Admin Dashboard",
-    },
-    {
-      image: "../src/images/calc.png",
-      alt: "calculator",
-      repoLink: "https://github.com/raviShrestha-js/calculatorjs",
-      liveLink: "https://ravishrestha-js.github.io/calculatorjs/",
-      title: "Calculator JS",
-    },
-    {
-      image: "../src/images/library.png",
-      alt: "library",
-      repoLink: "https://github.com/raviShrestha-js/thelibrary",
-      liveLink: "https://ravishrestha-js.github.io/thelibrary/",
-      title: "The Book Library",
-    },
-    {
-      image: "../src/images/landing.png",
-      alt: "landing page",
-      repoLink: "https://github.com/raviShrestha-js/odin-landing-page",
-      liveLink: "https://ravishrestha-js.github.io/odin-landing-page/",
-      title: "Landing Page",
-    },
-    {
-      image: "../src/images/rps-screen.png",
-      alt: "rock paper scissor",
-      repoLink: "https://github.com/raviShrestha-js/rock-paper-scissor",
-      liveLink: "https://ravishrestha-js.github.io/rock-paper-scissor/",
-      title: "Rock Paper Scissor Game",
-    },
-    {
-      image: "../src/images/portfolio.png",
-      alt: "portfolio page",
-      repoLink: "https://github.com/raviShrestha-js/portfolio-cv",
-      liveLink: "https://ravishrestha-js.github.io/portfolio-cv/",
-      title: "Portfolio Website",
-    },
-  ];
-  const selectedItem = projectData.find((item) => item.title === selectedId);
-
-  useEffect(() => {
-    const handleIntersection = async (entries) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting && !animationTriggered) {
-          setAnimationTriggered(true);
-          await controls.start((i) => ({
-            x: [0, 0],
-            y: [0, 0],
-            opacity: [0, 2],
-            transition: { duration: 1, delay: i * 0.8 },
-            zIndex: i + 1,
-          }));
-        } else if (!entry.isIntersecting) {
-          setAnimationTriggered(false);
-        }
-      }
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.5,
-    });
-
-    if (projectBgRef.current) {
-      observer.observe(projectBgRef.current);
-    }
-
-    return () => {
-      if (projectBgRef.current) {
-        observer.unobserve(projectBgRef.current);
-      }
-    };
-  }, [projectBgRef, controls, animationTriggered]);
-
   return (
     <section className="projects" id="projects">
-      <h1>Projects</h1>
-      <div className="project-bg" ref={projectBgRef}>
+      <p className="section-kicker">Projects</p>
+      <h1>Project fleet in orbit</h1>
+      <div className="project-orbit">
         {projectData.map((project, index) => (
-          <motion.div
-            key={index}
-            custom={index}
-            animate={controls}
-            initial={{ x: 0, y: 0, opacity: 0, zIndex: index + 1 }}
+          <article
+            className="project-container"
+            style={{ "--project-index": index }}
+            key={project.title}
           >
-            <Project
-              {...project}
-              onClick={() => setSelectedId(project.title)}
-            />
-          </motion.div>
+            <div className="project-holo-tag">{project.tag}</div>
+            <div className="proj-image">
+              <img src={project.image} alt={project.alt} />
+            </div>
+            <div className="proj-title">
+              <h3>{project.title}</h3>
+              <p>{project.summary}</p>
+            </div>
+            <div className="project-actions">
+              <a href={project.repoLink} target="_blank" rel="noreferrer">
+                <i className="fa-brands fa-github"></i>
+                Code
+              </a>
+              <a href={project.liveLink} target="_blank" rel="noreferrer">
+                <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                Live
+              </a>
+            </div>
+          </article>
         ))}
       </div>
-
-      <AnimatePresence>
-        {selectedItem && (
-          <>
-            <motion.div
-              className="backdrop"
-              onClick={() => setSelectedId(null)}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            />
-            <motion.div
-              className="selected-project"
-              layoutId={selectedId}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ProjectContent {...selectedItem} />
-              <motion.button onClick={() => setSelectedId(null)}>
-                Close
-              </motion.button>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

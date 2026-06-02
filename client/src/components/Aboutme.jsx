@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import profileImage from "../images/profile-3d-ravi.png";
 
 const useTypingAnimation = (texts, options) => {
   const [currentText, setCurrentText] = useState("");
@@ -37,10 +38,10 @@ const useTypingAnimation = (texts, options) => {
 
 const Aboutme = () => {
   const texts = [
-    "JavaScript Developer",
-    "ServiceNow Developer",
+    "ServiceNow Technical Consultant",
+    "Workflow Automation Specialist",
+    "ITSM Platform Builder",
     "React Developer",
-    "Web Developer",
   ];
 
   const typingOptions = {
@@ -54,40 +55,65 @@ const Aboutme = () => {
 
   return (
     <section className="about-me" id="about-me">
-      <div className="page-header page-header-small"></div>
-      <div className="img-contain"></div>
-
       <div className="content">
-        <h1>About me</h1>
+        <p className="section-kicker">About</p>
+        <h1>ServiceNow consultant with a builder mindset</h1>
         <h2>
           I am <span>{currentText}</span>
           <span className="cursor">|</span>
         </h2>
         <div className="details-container">
           <div className="summary">
-            <h3>Summary</h3>
+            <h3>Profile</h3>
             <p>
-              Fresh IT Graduate with a GPA score of 6.5 out of 7, enthusiastic
-              and self-motivated about developing scalable web applications and
-              working across the full stack development. Experience in building
-              two web apps as a college project using HTML5, CSS3, JavaScript,
-              PHP and MySQL. Motivated to advance my web development, Machine
-              Learning, and Artificial Intelligence abilities and knowledge in
-              order to establish a successful tech career.
+              I have 3 years of ServiceNow experience at xAmplify Services Pvt
+              Ltd, working as a ServiceNow Technical Consultant across platform
+              configuration, workflow automation, ITSM processes, scripting, and
+              user-focused service experiences.
             </p>
+            <p>
+              My background in React and web development helps me bring a clean
+              front-end eye to enterprise platforms: clear interfaces, maintainable
+              logic, reliable integrations, and automation that removes friction
+              from daily operations.
+            </p>
+            <div className="pill-row">
+              <span>ServiceNow</span>
+              <span>ITSM</span>
+              <span>Flow Designer</span>
+              <span>Client Scripts</span>
+              <span>Business Rules</span>
+            </div>
+            <div className="signal-grid">
+              <div>
+                <strong>3+</strong>
+                <span>Years delivering ServiceNow outcomes</span>
+              </div>
+              <div>
+                <strong>24/7</strong>
+                <span>Operational mindset for service teams</span>
+              </div>
+              <div>
+                <strong>UI + Logic</strong>
+                <span>Front-end polish with platform scripting</span>
+              </div>
+            </div>
           </div>
 
           <div className="information">
-            <img
-              src="../src/images/propic.jpg"
-              alt="profile"
-              width="150"
-              height="150"
-            />
+            <div className="mini-avatar">
+              <img
+                src={profileImage}
+                alt="profile"
+                width="150"
+                height="150"
+              />
+            </div>
             <div className="info-details">
               <div className="fullname">
                 <h3>Ravi Shrestha</h3>
               </div>
+              <p className="role-label">ServiceNow Technical Consultant</p>
               <div className="row mt-3">
                 <div className="col-sm-2 text-center">
                   <i className="fa-solid fa-envelope"></i>
